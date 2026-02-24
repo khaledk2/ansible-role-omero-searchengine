@@ -1,7 +1,8 @@
 ---
 
-- debug:
-   var: molecule_yml
+- name: display vars to check
+  debug:
+    var: molecule_yml
 
 #Add all elasticsearch nodes
 - name: omero searchengine | Add elastic nodes to elasticsearch_nodes
