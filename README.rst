@@ -5,7 +5,7 @@ Installs and configures the IDR search engine.
 
 Dependencies
 ------------
-OMERO.docker is required.
+ome.docker is required.
 
 Role Variables
 --------------
