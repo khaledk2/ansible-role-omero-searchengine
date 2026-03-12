@@ -3,11 +3,7 @@ IDR searcher
 
 Installs and configures the IDR search engine.
 
-Dependencies
-------------
-
 OMERO.docker.web is required.
-
 
 Role Variables
 --------------
