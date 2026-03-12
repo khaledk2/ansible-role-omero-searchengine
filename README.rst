@@ -3,7 +3,9 @@ IDR searcher
 
 Installs and configures the IDR search engine.
 
-OMERO.docker.web is required.
+Dependencies
+------------
+OMERO.docker is required.
 
 Role Variables
 --------------
@@ -131,4 +133,3 @@ Author Information
 ------------------
 
 ome-devel@lists.openmicroscopy.org.uk
-
