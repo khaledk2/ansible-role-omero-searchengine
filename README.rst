@@ -31,7 +31,7 @@ Role Variables
 - `nginx_port`: The port Nginx should use
 - `cache_rows`: The number of rows the indexing process can handle at one time
 - `no_index_processes`: The number of parallel processes available for the indexing process
-- `dump_output_format`: The data can be dumped in either CSV_BFF or JSON format. default is JSON
+- `dump_output_format`: The data can be dumped in either CSV_BFF or JSON format. The default is JSON
 
 Example Playbook
 ----------------
@@ -95,7 +95,7 @@ The role can also be used for:
 
     ansible-playbook install_searchengine.yml  --tags "dump_projects"
 
-Assuming the installation playbook name is `install_searchengine.yml`
+Assuming the installation playbook name is ``install_searchengine.yml``
 
 
 The user can perform the following checks to ensure that the application is installed correctly and functioning as expected.
