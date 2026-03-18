@@ -35,7 +35,7 @@ Role Variables
 
 Example Playbook
 ----------------
-::
+
 
     - name: Deploying search engine
       connection: local
@@ -71,29 +71,21 @@ Example Playbook
 The role can also be used for:
 
 
-- index the data
-::
+- Index the data
 
-        ansible-playbook install_searchengine.yml  --tags "indexer"
-
+      ansible-playbook install_searchengine.yml  --tags "indexer"
 - Backup the Elasticsearch data
-::
 
-    ansible-playbook install_searchengine.yml  --tags "backup"
-
+      ansible-playbook install_searchengine.yml  --tags "backup"
 - Restore the Elasticsearch data
-::
 
-    ansible-playbook install_searchengine.yml  --tags "restore"
+      ansible-playbook install_searchengine.yml  --tags "restore"
 - Dump the screens data:
-::
 
-    ansible-playbook install_searchengine.yml  --tags "dump_screens"
-
+      ansible-playbook install_searchengine.yml  --tags "dump_screens"
 - Dump the the projects data:
-::
 
-    ansible-playbook install_searchengine.yml  --tags "dump_projects"
+      ansible-playbook install_searchengine.yml  --tags "dump_projects"
 
 Assuming the installation playbook name is ``install_searchengine.yml``
 
@@ -102,27 +94,21 @@ The user can perform the following checks to ensure that the application is inst
 
 The following command verifies that the search engine is running and listening for incoming requests:
 
-::
-
     curl -XGET http://127.0.0.1:5577/searchengine/api/v1/resources/
 
 This command verifies that Nginx is running and able to connect to the search engine.
-::
 
     curl -XGET http://127.0.0.1:8080/searchengine/api/v1/resources/
 
 Both of them should have the same output message, i.e.
-::
 
     OMERO search engine (API V1)
 
 The following command verifies that the Elasticsearch cluster is running and that the search engine can connect to it.
-::
 
     curl -I  -k -u "elastic:mypassword" https://127.0.0.1:9201/image_keyvalue_pair_metadata_1
 
 The output of the command should be;
-::
 
     HTTP/1.1 200 OK
     X-elastic-product: Elasticsearch
