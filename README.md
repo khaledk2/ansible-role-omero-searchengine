@@ -71,7 +71,7 @@ Example Playbook
 The role can also be used for:
 
 
-- index the data
+- Index the data
 
       ansible-playbook install_searchengine.yml  --tags "indexer"
 - Backup the Elasticsearch data
