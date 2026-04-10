@@ -20,7 +20,7 @@
 - name: omero searchengine | Create docker network
   become: yes
   community.docker.docker_network:
-    name: {{ searchengine_network }}
+    name: "{{ searchengine_network }}"
     driver: bridge
     ipam_config:
       - subnet=10.11.0.0/16
