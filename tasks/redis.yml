@@ -16,7 +16,7 @@
     name: searchengine-redis-container
     image: redis:latest
     networks:
-      - name: searchengine-net
+      - name: "{{ searchengine_network }}"
         ipv4_address: 10.11.0.15
     # network_mode: "host"
     published_ports:
