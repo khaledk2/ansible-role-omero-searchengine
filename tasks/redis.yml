@@ -13,7 +13,7 @@
 
 - name: omero searchengine | Create Searchengine Redis container
   community.docker.docker_container:
-    name: searchengine-redis-container
+    name: "searchengine-redis-container{{ cluster_id | default(omit) }}"
     image: redis:latest
     networks:
       - name: "{{ searchengine_network }}"

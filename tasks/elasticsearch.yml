@@ -108,7 +108,7 @@
       path.data: "/var/lib/elasticsearch"
       path.logs: "/var/log/elasticsearch"
       path.repo: "{{ elasticsearch_backup_folder }}"
-      node.name: searchengine_elasticsearch_node1
+      node.name: "searchengine_elasticsearch_node1{{ cluster_id | default(omit) }}"
       bootstrap.memory_lock: "true"
       network.host: 0.0.0.0
       cluster.name: "searchengine-cluster"
@@ -170,7 +170,7 @@
       path.data: "/var/lib/elasticsearch"
       path.logs: "/var/log/elasticsearch"
       path.repo: "{{ elasticsearch_backup_folder }}"
-      node.name: searchengine_elasticsearch_node1
+      node.name: "searchengine_elasticsearch_node1{{ cluster_id | default(omit) }}"
       bootstrap.memory_lock: "true"
       network.host: 0.0.0.0
       cluster.name: "searchengine-cluster"
@@ -236,7 +236,7 @@
   become: yes
   community.docker.docker_container:
     image: "{{ search_engineelasticsearch_docker_image }}"
-    name: "searchengine_elasticsearch_node{{ item }}"
+    name: "searchengine_elasticsearch_node{{ item }}{{ cluster_id | default(omit) }}"
     ulimits:
       - 'memlock:-1:-1'
     cleanup: True

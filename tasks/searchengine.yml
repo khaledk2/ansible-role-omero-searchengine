@@ -298,7 +298,7 @@
   become: yes
   community.docker.docker_container:
     image: "{{ searchengine_docker_image }}"
-    name: searchengine
+    name: "searchengine{{ cluster_id | default(omit) }}"
     cleanup: True
     command: "run_app {{ searchengineurlprefix }}"
     networks:
@@ -319,7 +319,7 @@
   become: yes
   community.docker.docker_container:
     image: "{{ searchengine_docker_image }}"
-    name: searchengine_celery
+    name: "searchengine_celery{{ cluster_id | default(omit) }}"
     cleanup: True
     command: "celery"
     networks:
@@ -337,7 +337,7 @@
   become: yes
   community.docker.docker_container:
     image: "{{ searchengine_docker_image }}"
-    name: searchengine_celery_beat
+    name: "searchengine_celery_beat{{ cluster_id | default(omit) }}"
     cleanup: True
     command: "beat"
     networks:
@@ -357,7 +357,7 @@
   become: yes
   community.docker.docker_container:
     image: "{{ searchengine_docker_image }}"
-    name: searchengine_indexer
+    name: "searchengine_indexer{{ cluster_id | default(omit) }}"
     cleanup: True
     command: "get_index_data_from_database"
     networks:
@@ -376,7 +376,7 @@
   become: yes
   community.docker.docker_container:
     image: "{{ searchengine_docker_image }}"
-    name: searchengine_backup_data
+    name: "searchengine_backup_data{{ cluster_id | default(omit) }}"
     cleanup: True
     command: "backup_elasticsearch_data"
     networks:
@@ -394,7 +394,7 @@
   become: yes
   community.docker.docker_container:
     image: "{{ searchengine_docker_image }}"
-    name: searchengine_restore
+    name: "searchengine_restore{{ cluster_id | default(omit) }}"
     cleanup: True
     command: "restore_elasticsearch_data"
     networks:
@@ -413,7 +413,7 @@
   become: yes
   community.docker.docker_container:
     image: "{{ searchengine_docker_image }}"
-    name: dump_projects_{{ dump_output_format }}
+    name: "dump_projects_{{ dump_output_format }}{{ cluster_id | default(omit) }}"
     cleanup: True
     command: "dump_searchengine_data -d {{ default_datasource }} -r project  -f {{ dump_output_format }} -t {{ data_dump_folder }}/{{ default_datasource }}/{{ dump_output_format }} -o True"
     networks:
@@ -431,7 +431,7 @@
   become: yes
   community.docker.docker_container:
     image: "{{ searchengine_docker_image }}"
-    name: dump_screens_{{ dump_output_format }}
+    name: "dump_screens_{{ dump_output_format }}{{ cluster_id | default(omit) }}"
     cleanup: True
     command: "dump_searchengine_data -d {{ default_datasource }} -r screen  -f {{ dump_output_format }} -t {{ data_dump_folder }}/{{ default_datasource }}/{{ dump_output_format }} -o True"
     networks:
