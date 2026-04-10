@@ -146,8 +146,8 @@
     - name: "{{ searchengine_network }}"
       ipv4_address: 10.11.0.2
     published_ports:
-      - "9201:9200"
-      - "9301:9300"
+      - "920{{ elasticsearch_published_port_dig | int + 1 }}:9200"
+      - "930{{ elasticsearch_published_port_dig | int + 1 }}:9300"
     state: started
     restart_policy: always
     volumes:
@@ -208,8 +208,8 @@
     - name: "{{ searchengine_network }}"
       ipv4_address: 10.11.0.2
     published_ports:
-      - "9201:9200"
-      - "9301:9300"
+      - "920{{ elasticsearch_published_port_dig | int + 1 }}:9200"
+      - "930{{ elasticsearch_published_port_dig | int + 1 }}:9300"
     state: started
     restart_policy: always
     volumes:
@@ -291,5 +291,5 @@
     - "{{ apps_folder }}/searchengine/elasticsearch/node{{ item }}/logs:/var/log/elasticsearch"
     - "{{ elasticsearch_backup_folder }}:{{ elasticsearch_backup_folder }}"
     - "{{ apps_folder }}/searchengine/elasticsearch/certs:/usr/share/elasticsearch/config/certificates"
-  with_sequence: start=2 count={{ elasticsearch_no_nodes | int -1 }}
+  with_sequence: start=2 count={{ (elasticsearch_no_nodes | int -1)  + (elasticsearch_published_port_dig) }}
   when: not container_info_elasticsearch_node1.exists

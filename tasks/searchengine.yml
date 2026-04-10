@@ -304,7 +304,7 @@
     networks:
     - name: "{{ searchengine_network }}"
     published_ports:
-    - "{{ published_port }}:5577"
+    - "{{ searchengine_published_port }}:5577"
     #restart: "{{ searchengine_conf_status | changed }}"
     state: started
     restart_policy: always
