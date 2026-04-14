@@ -8,7 +8,7 @@
   ansible.builtin.set_fact:
     elasticsearch_nodes: '{{ elasticsearch_nodes + ["searchengine_elasticsearch_node"+item] }}'
     cacheable: yes
-  with_sequence: start=1 count={{ elasticsearch_no_nodes | int + elasticsearch_published_port_dig }}
+  with_sequence: start={{ elasticsearch_published_port_dig | int +2 }} count={{ (elasticsearch_no_nodes) }}
 
 #Add all elasticsearch nodes
 - name: omero searchengine | Add elastic nodes to elasticsearch_nodes_urls
@@ -79,7 +79,7 @@
 
 - name: omero searchengine | Check if a elastic node data folder exists
   ansible.builtin.stat:
-    path: "{{ apps_folder }}/searchengine/elasticsearch/node1/data"
+    path: "{{ apps_folder }}/searchengine/elasticsearch/node{{ elasticsearch_published_port_dig | int + 2 }}/data"
   register: elastic_node_data_folder
 
 - name: omero searchengine | Create app top level directory
@@ -125,8 +125,7 @@
     owner: 1000
     group: root
     mode: 0755
-  #with_sequence: start=1 count={{ elasticsearch_no_nodes }}
-  with_sequence: start={{ elasticsearch_published_port_dig | int +1 }} count={{ (elasticsearch_no_nodes) }}
+  with_sequence: start={{ elasticsearch_published_port_dig | int +2 }} count={{ (elasticsearch_no_nodes) }}
   changed_when: false
 
 
@@ -139,7 +138,7 @@
     owner: 1000
     group: root
     mode: 0755
-  with_sequence: start=1 count={{ elasticsearch_no_nodes }}
+  with_sequence: start={{ elasticsearch_published_port_dig | int +2 }} count={{ (elasticsearch_no_nodes) }}
   changed_when: false
 
 
@@ -152,7 +151,7 @@
     owner: 1000
     group: root
     mode: 0755
-  with_sequence: start=1 count={{ elasticsearch_no_nodes }}
+  with_sequence: start={{ elasticsearch_published_port_dig | int +2 }} count={{ (elasticsearch_no_nodes) }}
   when: not elastic_node_data_folder.stat.exists or force_update
 
 - name: omero searchengine | deploy elasticsearch cluster
