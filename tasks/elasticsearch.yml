@@ -116,7 +116,8 @@
       - "920{{ elasticsearch_published_port_dig | int + 2 }}:9200"
       - "930{{ elasticsearch_published_port_dig | int + 2 }}:9300"
       - "10.11.0.{{ elasticsearch_published_port_dig | int + 2 }}"
-
+      - "The cluster id is {{ cluster_id | default(omit) }}"
+      - "cluster.name: searchengine-cluster{{ cluster_id | default(omit) }}"
 
 
 - name: omero searchengine | Run first docker elasticsearch main node
@@ -134,7 +135,7 @@
       node.name: "searchengine_elasticsearch_node{{ elasticsearch_published_port_dig | int +2 }}"
       bootstrap.memory_lock: "true"
       network.host: 0.0.0.0
-      cluster.name: "searchengine-cluster"
+      cluster.name: "searchengine-cluster{{ cluster_id | default(omit) }}"
       cluster.initial_master_nodes: "{{ elasticsearch_nodes | join(',') }}"
       http.host: 0.0.0.0
       #http.port: 9200
@@ -197,7 +198,7 @@
       node.name: "searchengine_elasticsearch_node{{ elasticsearch_published_port_dig | int +2 }}"
       bootstrap.memory_lock: "true"
       network.host: 0.0.0.0
-      cluster.name: "searchengine-cluster"
+      cluster.name: "searchengine-cluster{{ cluster_id }}"
       # cluster.initial_master_nodes: "{{ elasticsearch_nodes | join(',') }}"
       http.host: 0.0.0.0
       #http.port: 9200
@@ -271,7 +272,7 @@
       node.name: "searchengine_elasticsearch_node{{ item }}"
       bootstrap.memory_lock: "true"
       network.host: 0.0.0.0
-      cluster.name: "searchengine-cluster"
+      cluster.name: "searchengine-cluster{{ cluster_id | default(omit) }}"
       discovery.seed_hosts: "searchengine_elasticsearch_node{{ elasticsearch_published_port_dig | int +2 }}"
       cluster.initial_master_nodes: "{{ elasticsearch_nodes | join(',') }}"
       http.host: 0.0.0.0
