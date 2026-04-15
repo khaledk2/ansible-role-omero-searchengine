@@ -34,8 +34,8 @@
   community.docker.docker_container:
     name: "searchengine-nginx-container{{ cluster_id | default(omit) }}"
     image: nginx:latest
-    networks:
-      - name: host
+    #networks:
+    #  - name: host
 
     published_ports:
       - "{{ nginx_port }}:{{ nginx_port }}"
