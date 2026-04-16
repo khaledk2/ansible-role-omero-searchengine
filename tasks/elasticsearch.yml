@@ -198,7 +198,7 @@
       node.name: "searchengine_elasticsearch_node{{ elasticsearch_published_port_dig | int +2 }}"
       bootstrap.memory_lock: "true"
       network.host: 0.0.0.0
-      cluster.name: "searchengine-cluster{{ cluster_id }}"
+      cluster.name: "searchengine-cluster{{ cluster_id | default(omit)}}"
       # cluster.initial_master_nodes: "{{ elasticsearch_nodes | join(',') }}"
       http.host: 0.0.0.0
       #http.port: 9200
