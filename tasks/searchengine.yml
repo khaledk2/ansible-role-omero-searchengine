@@ -304,7 +304,7 @@
     command: "run_app {{ searchengineurlprefix }}"
     networks:
     - name: "{{ searchengine_network }}"
-    ipv4_address: 10.11.1.{{ elasticsearch_published_port_dig | int + elasticsearch_no_nodes | int +4 }}
+      ipv4_address: 10.11.1.{{ elasticsearch_published_port_dig | int + elasticsearch_no_nodes | int +4 }}
     published_ports:
     - "{{ searchengine_published_port }}:5577"
     #restart: "{{ searchengine_conf_status | changed }}"
