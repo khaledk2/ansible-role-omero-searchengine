@@ -1,13 +1,12 @@
 
-
 server {
     listen {{ nginx_port }};
 
      location /{{ searchengineurlprefix }} {
 
-        proxy_pass http://{{ host_ip | default (127.0.0.1)}}:{{ searchengine_published_port }}/{{ searchengineurlprefix }};
-        proxy_redirect http://{{ host_ip |default (127.0.0.1)}}:{{ searchengine_published_port }}/{{ searchengineurlprefix }} $scheme://$server_name;
-        proxy_set_header Host $host/searchengine;
+        proxy_pass http://{{ ansible_default_ipv4.address }}:{{ searchengine_published_port }}/{{ searchengineurlprefix }};
+        proxy_redirect http://{{ ansible_default_ipv4.address }}:{{ searchengine_published_port }}/{{ searchengineurlprefix }} $scheme://$server_name;
+        proxy_set_header Host $host/{{ searchengineurlprefix }};
     }
     location /send_file/ {
     internal;
