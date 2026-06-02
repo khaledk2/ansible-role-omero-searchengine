@@ -2,7 +2,7 @@
   become: yes
   community.docker.docker_container:
     image: "{{ searchengine_docker_image }}"
-    name: "dump_projects_{{ dump_output_format }}{{ cluster_id | default(omit) }}"
+    name: "delete_container_{{ container_type | default(omit) }}"
     cleanup: True
     command: "delete_containers -s {{ default_datasource }} -r {{ container_type }}  -d {{ synchronous_run }} -i {{ ids }}"
     networks:

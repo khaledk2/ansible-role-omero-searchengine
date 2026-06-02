@@ -2,7 +2,7 @@
   become: yes
   community.docker.docker_container:
     image: "{{ searchengine_docker_image }}"
-    name: "dump_projects_{{ dump_output_format }}{{ cluster_id | default(omit) }}"
+    name: "index_container_{{ container_type }}{{ ids | default(omit) }}"
     cleanup: True
     command: "index_container_from_database -d {{ default_datasource }} -r {{ container_type }}  -i {{ ids }}"
     networks:
